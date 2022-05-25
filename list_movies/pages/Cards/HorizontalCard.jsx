@@ -3,8 +3,10 @@ import {
     StyleSheet,
     Image,
     Dimensions,
-    Text
+    Text,
+    TouchableOpacity
 } from "react-native";
+import {FontAwesome} from 'react-native-vector-icons';
 
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
@@ -13,16 +15,19 @@ const webSiteUri = "https://image.tmdb.org/t/p/w500"
 export default function HorizontalCard({poster, title, rate}){
 
     return(
-        <View >
+        <TouchableOpacity onPress={()=>{console.log("Hello")}}>
             <View style={styles.PosterStyle}>
-            <Image 
-                source={{uri: `${webSiteUri}${poster}`}}
-                style={styles.PosterImageStyle}
-            />
+                <Image 
+                    source={{uri: `${webSiteUri}${poster}`}}
+                    style={styles.PosterImageStyle}
+                />
             </View>
             <Text style={styles.PosterTitle}>{title}</Text>
-            <Text style={styles.PosterRate}>{rate}/10 IMDb</Text>
-        </View>
+            <View style={{flexDirection: "row"}}>
+                <FontAwesome name={"star"} color={"yellow"} />
+                <Text style={styles.PosterRate}>{rate}/10 IMDb</Text>
+            </View>
+        </TouchableOpacity>
     );
 }
 
