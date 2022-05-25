@@ -11,7 +11,7 @@ const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 const webSiteUri = "https://image.tmdb.org/t/p/w500"
 
-export default function VerticalCard({poster, title, rate}){
+export default function VerticalCard({poster, title, rate, overview}){
     return(
         <View style={styles.PosterStyle}>
             <Image 
@@ -24,6 +24,7 @@ export default function VerticalCard({poster, title, rate}){
                     <FontAwesome name={"star"} color={"yellow"} />
                     <Text style={styles.PosterRate}>{rate}/10 IMDb</Text>
                 </View>
+                <Text style={styles.OverviewStyle}>{overview}</Text>
             </View>
         </View>
     );
@@ -50,5 +51,11 @@ const styles = StyleSheet.create({
     PosterRate:{
         fontSize: 12,
         color: "#9C9C9C"
+    },
+    OverviewStyle:{
+        fontSize: 12,
+        color: "#9C9C9C",
+        width: width/2,
+        marginTop: 5
     }
 })

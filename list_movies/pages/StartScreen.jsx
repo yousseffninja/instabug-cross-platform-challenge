@@ -97,6 +97,7 @@ export default function StartScreen({navigation}) {
                             poster={itemData.item.poster_path}
                             title={itemData.item.title}
                             rate={itemData.item.vote_average}
+                            overview={itemData.item.overview}
                         />
                     }
                     ListFooterComponent={()=>renderLoader()}
