@@ -6,8 +6,10 @@ import {
     Text,
     TouchableOpacity, 
     FlatList,
-    Dimensions
+    Dimensions,
+    ActivityIndicator
 } from "react-native";
+import axios from "axios";
 import HorizontalCard from "./Cards/HorizontalCard";
 import VerticalCard from "./Cards/VerticalCard";
 
@@ -17,17 +19,39 @@ const height = Dimensions.get("window").height;
 export default function StartScreen({navigation}) {
 
     const [data, setData] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1)
+    const [isLoading, setIsLoading] = useState(false)
 
-    const getApi = async() =>{
-        const response = await fetch("https://api.themoviedb.org/3/discover/movie?api_key=acea91d2bff1c53e6604e4985b6989e2&page=1")
-        const json = await response.json();
-        console.log(json)
-        setData(json.results)
+    const getApi = () =>{
+        setIsLoading(true)
+        axios
+            .get(`https://api.themoviedb.org/3/discover/movie?api_key=acea91d2bff1c53e6604e4985b6989e2&page=${currentPage}`)
+            .then(res => {
+                console.log(res.data)
+                setData([...data, ...res.data.results])
+                console.log(data)
+                setIsLoading(false)
+            })
+            .catch(err => console.error(err));
+    }
+
+    const renderLoader = () =>{
+        return(
+            isLoading ?
+            <View style={styles.loaderStyle}>
+                <ActivityIndicator size="large" color="#aaa" />
+            </View> 
+            : null
+        )
+    }
+
+    const loadMoreIteam =() =>{
+        setCurrentPage(currentPage + 1)
     }
 
     useEffect(()=> {
         getApi()
-    },[])
+    },[currentPage])
 
 
     return(
@@ -42,8 +66,9 @@ export default function StartScreen({navigation}) {
                 <FlatList 
                     horizontal={true}
                     showsHorizontalScrollIndicator={false}
-                    data={data.slice(0, 6)}
+                    data={data}
                     keyExtractor={(item, index) => item.id}
+                    // onEndReached={}
                     renderItem={
                         itemData => 
                         <HorizontalCard 
@@ -63,7 +88,7 @@ export default function StartScreen({navigation}) {
             </View>
             <View style={styles.PopularStyle}>
                 <FlatList 
-                    data={data.slice(0, 4)}
+                    data={data}
                     showsVerticalScrollIndicator={false}
                     keyExtractor={(item, index) => item.id}
                     renderItem={
@@ -74,6 +99,9 @@ export default function StartScreen({navigation}) {
                             rate={itemData.item.vote_average}
                         />
                     }
+                    ListFooterComponent={()=>renderLoader()}
+                    onEndReached={()=>loadMoreIteam()}
+                    onEndReachedThreshold={0}
                 />
             </View>
         </SafeAreaView>
@@ -106,5 +134,9 @@ const styles = StyleSheet.create({
         height: height / 2, 
         paddingBottom: 65,
         paddingHorizontal: 10,
+    },
+    loaderStyle:{
+        marginVertical: 16,
+        alignItems: "center"
     }
 })
