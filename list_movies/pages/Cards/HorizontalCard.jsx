@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
         paddingBottom: 11
     },
     PosterImageStyle:{
-        width: width / 3, 
+        width: width / 2.5, 
         height: height / 4,
         borderRadius: 5,
         marginHorizontal: 5 ,
@@ -45,7 +45,8 @@ const styles = StyleSheet.create({
         width: width / 3, 
         fontSize: 14,
         fontWeight: "bold",
-        paddingBottom: 11
+        paddingBottom: 11,
+        color: "white"
     },
     PosterRate:{
         fontSize: 12,

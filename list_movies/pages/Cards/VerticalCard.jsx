@@ -24,7 +24,7 @@ export default function VerticalCard({poster, title, rate, overview}){
                     <FontAwesome name={"star"} color={"yellow"} />
                     <Text style={styles.PosterRate}>{rate}/10 IMDb</Text>
                 </View>
-                <Text style={styles.OverviewStyle}>{overview}</Text>
+                <Text style={styles.OverviewStyle}>{overview.length > 300 ? overview.substring(0, 300) + "..." : overview}</Text>
             </View>
         </View>
     );
@@ -46,7 +46,8 @@ const styles = StyleSheet.create({
         width: width / 3, 
         fontSize: 14,
         fontWeight: "bold",
-        paddingBottom: 11
+        paddingBottom: 11,
+        color: "white"
     },
     PosterRate:{
         fontSize: 12,

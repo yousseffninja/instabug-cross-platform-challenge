@@ -1,18 +1,18 @@
 import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import StartScreen from './pages/StartScreen';
 import Favourite from './pages/Favourite';
 
-const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
 
 export default function App() {
 
   return (
     <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen name="Home" component={StartScreen} />
-        <Tab.Screen name="Favourite" component={Favourite} />
-      </Tab.Navigator>
+      <Stack.Navigator screenOptions={{headerShown: false}}>
+        <Stack.Screen name="Home" component={StartScreen} />
+        <Stack.Screen name="Favourite" component={Favourite} />
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }

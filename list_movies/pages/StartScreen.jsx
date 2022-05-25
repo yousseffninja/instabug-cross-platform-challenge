@@ -55,7 +55,7 @@ export default function StartScreen({navigation}) {
 
 
     return(
-        <SafeAreaView style={{backgroundColor: "white"}}>
+        <SafeAreaView style={{backgroundColor: "#0b0b0e", height: height}}>
             <View style={styles.Header}>
                 <Text style={styles.HeaderTextStyle}>Popular</Text>
                 <TouchableOpacity style={styles.HeaderButton} onPress={null}>
@@ -118,7 +118,8 @@ const styles = StyleSheet.create({
     },
     HeaderTextStyle:{
         fontSize: 16,
-        fontWeight: "bold"
+        fontWeight: "bold",
+        color: "white"
     },
     HeaderButton: {
         borderWidth: 1,
@@ -132,8 +133,8 @@ const styles = StyleSheet.create({
         color: "#AAA9B1",
     },
     PopularStyle:{
-        height: height / 2, 
-        paddingBottom: 65,
+        height: height / 1.8, 
+        // paddingBottom: 65,
         paddingHorizontal: 10,
     },
     loaderStyle:{
