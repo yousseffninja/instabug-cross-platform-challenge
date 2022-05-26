@@ -56,6 +56,9 @@ export default function StartScreen({navigation}) {
 
     return(
         <SafeAreaView style={{backgroundColor: "#0b0b0e", height: height}}>
+            <View>
+
+            </View>
             <View style={styles.Header}>
                 <Text style={styles.HeaderTextStyle}>Popular</Text>
                 <TouchableOpacity style={styles.HeaderButton} onPress={null}>
@@ -78,6 +81,9 @@ export default function StartScreen({navigation}) {
                         />
                     }
                     style={{marginHorizontal: 5}}
+                    ListFooterComponent={()=>renderLoader()}
+                    onEndReached={()=>loadMoreIteam()}
+                    onEndReachedThreshold={0}
                 />
             </View>
             <View style={styles.Header}>
@@ -98,6 +104,8 @@ export default function StartScreen({navigation}) {
                             title={itemData.item.title}
                             rate={itemData.item.vote_average}
                             overview={itemData.item.overview}
+                            obj={itemData.item}
+                            navigation={navigation}
                         />
                     }
                     ListFooterComponent={()=>renderLoader()}

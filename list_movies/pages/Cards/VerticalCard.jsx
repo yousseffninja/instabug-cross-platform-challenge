@@ -3,7 +3,8 @@ import {
     StyleSheet,
     Dimensions,
     Image,
-    Text
+    Text,
+    TouchableOpacity
 } from "react-native";
 import {FontAwesome} from 'react-native-vector-icons';
 
@@ -11,9 +12,9 @@ const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 const webSiteUri = "https://image.tmdb.org/t/p/w500"
 
-export default function VerticalCard({poster, title, rate, overview}){
+export default function VerticalCard({obj, poster, title, rate, overview, navigation}){
     return(
-        <View style={styles.PosterStyle}>
+        <TouchableOpacity onPress={()=>navigation.navigate('Details', {obj})} style={styles.PosterStyle}>
             <Image 
                 source={{uri: `${webSiteUri}${poster}`}}
                 style={styles.posterImage}
@@ -24,9 +25,10 @@ export default function VerticalCard({poster, title, rate, overview}){
                     <FontAwesome name={"star"} color={"yellow"} />
                     <Text style={styles.PosterRate}>{rate}/10 IMDb</Text>
                 </View>
-                <Text style={styles.OverviewStyle}>{overview.length > 300 ? overview.substring(0, 300) + "..." : overview}</Text>
+                <Text style={styles.OverviewStyle}>release date: {obj.release_date}</Text>
+                <Text style={styles.OverviewStyle}>{overview.length > 250 ? overview.substring(0, 250) + "..." : overview}</Text>
             </View>
-        </View>
+        </TouchableOpacity>
     );
 }
 const styles = StyleSheet.create({

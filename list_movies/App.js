@@ -1,7 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import StartScreen from './pages/StartScreen';
-import Favourite from './pages/Favourite';
+import Details from './pages/Details';
 
 const Stack = createNativeStackNavigator();
 
@@ -11,7 +11,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name="Home" component={StartScreen} />
-        <Stack.Screen name="Favourite" component={Favourite} />
+        <Stack.Screen name="Details" component={Details} />
       </Stack.Navigator>
     </NavigationContainer>
   );
